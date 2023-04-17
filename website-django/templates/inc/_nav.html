@@ -1,0 +1,29 @@
+{% load i18n %}
+<nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'main_page' %}">{% trans 'Main page' %}</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'create_news' %}">{% trans 'Create news' %}</a>
+                </li>
+            {% endif %}
+
+          </ul>
+            {% if user.is_authenticated %}
+                <span class="navbar-text">
+                    <a class="nav-link active" href="{% url 'account' user.username %}">{% trans 'Personal account' %}</a>
+                    <a class="nav-link active" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                </span>
+            {% else %}
+                <span class="navbar-text">
+                    <a class="nav-link active asdasd" href="{% url 'login' %}">{% trans 'Login' %}</a>
+                    <a class="nav-link active" href="{% url 'registration' %}">{% trans 'Sign up' %}</a>
+                </span>
+            {% endif %}
+        </div>
+      </div>
+    </nav>

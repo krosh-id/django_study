@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load auth_extras %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ item.title }}{% endblock %}
+{% block content %}
+    <div class="col-md-9">
+        <div class="card mb-3">
+          <div class="card-header">
+            Категория: {{ item.category }}
+          </div>
+          <div class="card-body">
+              <div class="media">
+                  {% if item.image %}
+                      <img class="mr-3" src="{{ item.image.url }}" width="350" alt="">
+                  {% else %}
+                      <img class="mr-3" src="{% static 'images/common.png' %}" width="350" alt="">
+                  {% endif %}
+                  <div class="media-body">
+                      <h5 class="card-title">{{ item.title }}</h5>
+                      <p class="card-text">{{ item.description }}</p>
+                      {% if item.author == request.user.profile or request.user|has_group:'moderators' %}
+                      <a href="{% url 'update_news' item.pk %}" class="btn btn-primary">{% trans 'Update news' %}</a>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer text-muted">
+            {{ item.created_at|date:"Y-m-d H:i" }}
+          </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#{% load auth_extras %}#}
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{{ object.title }}</title>#}
+{#        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">#}
+{#</head>#}
+{#<body>#}
+{#    {% include 'inc/_nav.html' %}#}
+{#    <h2>Новость: {{ object.title }} </h2>#}
+{#    {% if object.image %}#}
+{#        <img src="{{ object.image.url }}" alt="">#}
+{#    {% else %}#}
+{#        <img class="mr-3" src="{% static 'images/common.png' %}" width="350" alt="">#}
+{#    {% endif %}#}
+{#    <p>Описание новости: {{ object.description }} </p>#}
+{#    <p>Категория: {{ object.category }}</p>#}
+{#    <p>Автор: {{ object.author }}</p>#}
+{#    <p>Время создания: {{ object.created_at }}</p>#}
+{#    {% if request.user.profile == object.author or request.user|has_group:"moderators" %}#}
+{#        <a href="{% url 'update_news' object.pk %}">Редактировать новость</a>#}
+{#    {% endif %}#}
+{#    {% if existing_comments %}#}
+{#        <ul>#}
+{#            {% for comment in object.comment_set.all %}#}
+{#                <li>#}
+{#                    Имя пользователя: {{ comment.name }}<br>#}
+{#                    Комментарий: {{ comment.comment }}#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    {% else %}#}
+{#        <p>Комментариев нет</p>#}
+{#    {% endif %}#}
+{#    {% if request.user.is_authenticated %}#}
+{#        <form method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ comment_form.as_p }}#}
+{#            <button type="submit">Опубликовать комментарий</button>#}
+{#        </form>#}
+{#    {% else %}#}
+{#        <p>Для того чтобы оставить комментарий <a href="{% url 'login' %}">Войдите</a> или <a#}
+{#                href="{% url 'registration' %}">зарегистрируйтесь</a></p>#}
+{#    {% endif %}#}
+{#</body>#}
+{#</html>#}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Personal account' %}{% endblock %}
+{% block content %}
+    <h2>{% trans 'Personal account' %}</h2>
+    <div class="text">
+        <p>{% trans 'Nickname' %}: {{ user.username }}</p>
+        <p>{% trans "Post's quantity" %}: {{ user.profile.news_quantity }}</p>
+        <p>{% trans "Comment's quantity" %}: {{ user.profile.comment_quantity }}</p>
+    </div>
+{% endblock %}
